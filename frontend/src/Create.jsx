@@ -15,10 +15,13 @@ export function Create({ setRefresh }){
     }
     return (
     <>
-    Title: <input className='border-2 mx-2' type="text" ref={title}/>
-    Description: <input className='border-2 mx-2' type="text" ref={des}/>
-    <button onClick={() => {title.current.value && des.current.value? create(title.current.value , des.current.value) : alert("Invalid input"); title.current.value = "" ; des.current.value = "";}}  className='border-2'>Create</button>
+    <div className='flex flex-col justify-center border-2 '>
+    <div className='mx-auto p-2'> Title: <input className='border-2 mx-2 ' type="text" ref={title}/></div>
+    <div className='mx-auto p-2'>Description: <input className='border-2 mx-2' type="text" ref={des}/></div>
+            <br />
+    <button className='border-2 p-2 bg-gray-200 mx-auto px-4 rounded-xl' onClick={() => {title.current.value && des.current.value? create(title.current.value , des.current.value) : alert("Invalid input"); title.current.value = "" ; des.current.value = "";}} >Create</button>
     <br />
+    </div>
     </>
     )
 }

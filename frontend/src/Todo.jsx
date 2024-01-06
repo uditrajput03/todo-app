@@ -12,10 +12,10 @@ export function Todo({todos ,setRefresh }) {
   return (
     <>
       {todos.map((todo) => {
-        return (<div  className='border-2' key={"title"}>
+        return (<div  className='border-2 flex flex-col' key={"title"}>
         <h1 className='text-3xl'>{todo["title"]}</h1>
         <h1>{todo.description}</h1>
-        <button onClick={() => {markAsDone(todo._id)}} className='border-2' id={todo?._id}>{ todo.completed ? "Completed" : "Mark as done"}</button>
+        <button onClick={() => {markAsDone(todo._id)}} className='border-2 ml-auto' id={todo?._id}>{ todo.completed ? "Completed" : "Mark as done"}</button>
         </div>)
       })}
     </>
