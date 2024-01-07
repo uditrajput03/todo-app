@@ -4,7 +4,8 @@ mongoose.connect(process.env.MONGO_URL)
 const todoSchema = mongoose.Schema({
     title: String,
     description: String,
-    completed: Boolean
+    completed: Boolean,
+    active: Boolean
 })
 
 const todo = mongoose.model('todos', todoSchema);
