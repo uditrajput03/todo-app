@@ -8,6 +8,7 @@ function App() {
     fetch('https://congenial-zebra-764qr55vwpf455-3000.app.github.dev/todos')
     .then((res) => res.json())
     .then((res) => setTodo(res.todo))
+    .catch(() => {alert("Server is not up.Try after sometime")})
   },[refresh])
   return (
     <>
