@@ -12,7 +12,7 @@ function App() {
   },[refresh])
   return (
     <>
-      <h1 className='text-center text-3xl p-3'>ToDo-App</h1>
+      <h1 className='text-center text-6xl p-3 pb-10 bg-black text-white'>ToDo-App</h1>
       <Create setRefresh = {setRefresh}/>
       <div className='flex flex-col items-end'><button className='border-2 p-2' onClick={() => setRefresh((pre) => !pre)}>Refresh</button></div>
       <Todo todos={todo} setRefresh = {setRefresh}/>

@@ -15,7 +15,7 @@ export function Create({ setRefresh }){
     }
     return (
     <>
-    <div className='flex flex-col justify-center border-2 '>
+    <div className='flex flex-col bg-gray-300 justify-center border-2 '>
     <div className='mx-auto p-2'> Title: <input className='border-2 mx-2 ' type="text" ref={title}/></div>
     <div className='mx-auto p-2'>Description: <input className='border-2 mx-2' type="text" ref={des}/></div>
             <br />
