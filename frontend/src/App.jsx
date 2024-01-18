@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Todo } from './Todo'
 import { Create } from "./Create"
+
 function App() {
   const [refresh, setRefresh] = useState(false);
   const [todo, setTodo] = useState([])
   useEffect(() => { 
-    fetch('https://congenial-zebra-764qr55vwpf455-3000.app.github.dev/todos')
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/todos`)
     .then((res) => res.json())
     .then((res) => setTodo(res.todo))
     .catch(() => {alert("Server is not up.Try after sometime")})

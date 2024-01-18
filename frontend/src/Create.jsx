@@ -3,7 +3,7 @@ export function Create({ setRefresh }){
     let title = useRef(null)
     let des = useRef(null)
     function create(title , description){
-        fetch('https://congenial-zebra-764qr55vwpf455-3000.app.github.dev/todo' , {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/todo` , {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

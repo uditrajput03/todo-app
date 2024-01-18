@@ -1,6 +1,6 @@
 export function Todo({todos ,setRefresh }) {
   function markAsDone(id , route){
-    fetch(`https://curly-halibut-5pvjppg6w7wc7j4q-3000.app.github.dev/${route}` , {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/${route}` , {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
