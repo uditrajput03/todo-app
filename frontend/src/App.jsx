@@ -1,22 +1,32 @@
 import { useEffect, useState } from 'react'
 import { Todo } from './Todo'
 import { Create } from "./Create"
+import { Button } from './components/ui/button';
 
 function App() {
   const [refresh, setRefresh] = useState(false);
   const [todo, setTodo] = useState([])
-  useEffect(() => { 
+  useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/todos`)
-    .then((res) => res.json())
-    .then((res) => setTodo(res.todo))
-    .catch(() => {alert("Server is not up.Try after sometime")})
-  },[refresh])
+      .then((res) => res.json())
+      .then((res) => setTodo(res.todo))
+      .catch(() => { alert("Server is not up.Try after sometime") })
+  }, [refresh])
   return (
     <>
-      <h1 className='text-center text-6xl p-3 pb-10 bg-black text-white'>ToDo-App</h1>
-      <Create setRefresh = {setRefresh}/>
-      <div className='flex flex-col items-end'><button className='border-2 p-2' onClick={() => setRefresh((pre) => !pre)}>Refresh</button></div>
-      <Todo todos={todo} setRefresh = {setRefresh}/>
+      <div className=''>
+        <h1 className='text-center text-3xl p-2 bg-black text-white'>SyncTasks</h1>
+        <div className='lg:px-40'>
+          <Create setRefresh={setRefresh} />
+          <div className='relative flex flex-col items-end'>
+            <Button className='absolute -top-10 border-2 p-2' onClick={() => setRefresh((pre) => !pre)}>Refresh</Button>
+          </div>
+          <legend></legend>
+          <div className=''>
+            <Todo todos={todo} setRefresh={setRefresh} />
+          </div>
+        </ div>
+      </div>
     </>
   )
 }
