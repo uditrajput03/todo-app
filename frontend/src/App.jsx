@@ -5,12 +5,14 @@ import { Button } from './components/ui/button';
 
 function App() {
   const [refresh, setRefresh] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [todo, setTodo] = useState([])
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/todos`)
       .then((res) => res.json())
       .then((res) => setTodo(res.todo))
       .catch(() => { alert("Server is not up.Try after sometime") })
+      .finally(() => setLoading(false))
   }, [refresh])
   return (
     <>
@@ -19,7 +21,7 @@ function App() {
         <div className='lg:px-40'>
           <Create setRefresh={setRefresh} />
           <div className='relative flex flex-col items-end'>
-            <Button className='absolute -top-10 border-2 p-2' onClick={() => setRefresh((pre) => !pre)}>Refresh</Button>
+            <Button className='absolute -top-10 border-2 p-2' disabled={loading} onClick={() => {setRefresh((pre) => !pre); setLoading(true)}}>Refresh</Button>
           </div>
           <legend></legend>
           <div className=''>
