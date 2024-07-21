@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <div className=''>
-        <h1 className='text-center text-3xl p-2 bg-black text-white'>SyncTasks</h1>
+        <h1 className='text-center text-2xl p-2 bg-black text-white'>SyncTasks</h1>
         <div className='lg:px-40'>
           <Create setRefresh={setRefresh} />
           <div className='relative flex flex-col items-end'>
