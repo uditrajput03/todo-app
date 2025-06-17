@@ -1,17 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
-import { Input } from "@/components/ui/input"
+import { useRef } from 'react'
 import { Button } from './components/ui/button'
 import { FloatingInput, FloatingLabel, FloatingLabelInput } from './components/ui/floating-label-input'
 export function Create({ setRefresh }) {
     let title = useRef(null)
     let des = useRef(null)
+    let token = localStorage.getItem('token')
+    let headers = {
+        "Content-Type": "application/json",
+    }
+    if(token) headers["authorization"] = "Bearer " + localStorage.getItem('token')     
     function create(title, description) {
-        fetch(`${import.meta.env.VITE_BACKEND_URL}/todo`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/todo`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
+            headers,
             body: JSON.stringify({ title: title, description: description })
         })
             .then(() => setRefresh((pre) => !pre))
