@@ -1,13 +1,21 @@
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 export function Todo({ todos, setRefresh }) {
   function markAsDone(id, method = "PUT") {
     let token = localStorage.getItem('token')
     let headers = {}
     if (token) headers["authorization"] = "Bearer " + localStorage.getItem('token')
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/todo/${id}`, {
+    const res = fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/todo/${id}`, {
       method, headers
     })
       .then(() => setRefresh((pre) => !pre))
+    toast.promise(res, {
+      loading: 'Loading...',
+      success: () => {
+        return method == "DELETE" ? "Removed": "Completed";
+      },
+      error: 'Error'
+    });
   }
   return (
     <>

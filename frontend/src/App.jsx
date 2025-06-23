@@ -3,6 +3,7 @@ import { Todo } from './Todo'
 import { Create } from "./Create"
 import { Button } from './components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { Toaster, toast } from 'sonner'
 
 function App() {
   const [refresh, setRefresh] = useState(false);
@@ -16,6 +17,7 @@ function App() {
     navigate('/')
     setLog(false)
     setRefresh(p => !p)
+    toast.success("Logged Out")
   }
 
   useEffect(() => {
@@ -30,15 +32,24 @@ function App() {
     if (token) {
       options.headers = { authorization: "Bearer " + token }
     }
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/todo`, options)
+    const res = fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/todo`, options)
       .then((res) => res.json())
       .then((res) => setTodo(res.todos))
       .catch(() => { console.log("Server is not up.Try after sometime") })
       .finally(() => setLoading(false))
+    toast.promise(res, {
+      loading: 'Loading...',
+      success: () => {
+        return "Refreshed";
+      },
+      error: 'Error'
+    });
   }, [refresh])
   return (
     <>
       <div className=''>
+        <Toaster />
+
         <div className='flex justify-between bg-black items-center px-10'>
           <h1 className='text-center text-2xl p-2 text-gray-50'>SyncTasks</h1>
           <div className='flex gap-5 text-gray-50'>
@@ -47,6 +58,7 @@ function App() {
               <button onClick={() => navigate('signup')}>Signup</button></>}
           </div>
         </div>
+        
         <div className='lg:px-40'>
           <Create setRefresh={setRefresh} />
           <div className='relative flex flex-col items-end'>
