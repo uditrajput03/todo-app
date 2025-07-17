@@ -1,0 +1,29 @@
+name: todo-app
+services:
+  frontend:
+    image: todo-frontend
+    depends_on:
+      - backend
+    ports:
+      - 8080:80
+    # volumes:
+    #   - dist:/usr/share/nginx/html
+  backend:
+    image: todo-backend
+    container_name: backend
+    depends_on:
+      - mongodb
+    environment:
+      - DB=mongodb://mongodb:27017
+      - JWT="THISISTESTJWT"
+    ports:
+      - 3000:3000
+  mongodb:
+    image: mongo:noble
+    container_name: mongodb
+    volumes: 
+      - db:/data/db
+
+volumes:
+  db:
+  # dist:
