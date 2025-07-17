@@ -4,10 +4,11 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 export default function Signup() {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    // const [email, setEmail] = useState('')
+    // const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
+        const {username: email , password} = data
         let res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signup`, {
             method: "POST",
             body: JSON.stringify({email, password}),
